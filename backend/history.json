@@ -1,0 +1,32 @@
+[
+  {
+    "txid": "3a8b49227a8864c9a2ca75ee5d3bf9b15857009c90bb80c193e6e513cd45e3e4",
+    "type": "upi",
+    "sender": "user1@upi",
+    "receiver": "user2@upi",
+    "amount": 200,
+    "status": "refunded_via_blockchain",
+    "timestamp": "2025-08-31 20:34:59",
+    "refund_txid": "9ee0150b08a8b3258836ea86296ac1876241fab9724e30c23a836d0eb3fea32d",
+    "block_index": 1
+  },
+  {
+    "txid": "9ee0150b08a8b3258836ea86296ac1876241fab9724e30c23a836d0eb3fea32d",
+    "type": "refund",
+    "sender": "UPI-System",
+    "receiver": "user1@upi",
+    "amount": 200,
+    "status": "pending_on_chain",
+    "timestamp": "2025-08-31 20:34:59"
+  },
+  {
+    "txid": "d6fbf14a207dd40d2b094e77676c2895eea1b957ba659455277f88a94d3d5b5c",
+    "type": "refund",
+    "sender": "user2@upi",
+    "receiver": "user1@upi",
+    "amount": 300,
+    "status": "on_chain",
+    "timestamp": "2025-08-31 20:44:59",
+    "block_index": 2
+  }
+]

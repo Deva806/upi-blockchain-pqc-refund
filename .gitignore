@@ -1,0 +1,25 @@
+venv/
+.venv/
+backend/venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+
+# Native cryptography dependency
+backend/liboqs/
+
+# Compiled files
+*.exe
+*.obj
+*.o
+*.so
+*.dll
+
+# VS Code settings
+.vscode/
+**/.vscode/

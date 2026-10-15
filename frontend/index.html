@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UPI + PQC Blockchain Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #121a2a;
+      --muted: #93a4c0;
+      --text: #e6eefc;
+      --accent: #6aa9ff;
+      --accent2: #5dd6a2;
+      --danger: #ff6a6a;
+      --warn: #ffcc66;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin:0; background: var(--bg); color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial;
+    }
+    header {
+      padding: 20px; border-bottom: 1px solid #1f2a44;
+      display:flex; align-items:center; gap:14px;
+    }
+    header .dot {
+      width:10px; height:10px; border-radius:50%;
+      background: var(--accent2); box-shadow: 0 0 12px var(--accent2);
+    }
+    header h1 { font-size: 18px; margin:0; letter-spacing: 0.5px; }
+    .wrap { max-width: 1100px; margin: 20px auto; padding: 0 20px 40px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card {
+      background: linear-gradient(180deg, #121a2a, #101827);
+      border: 1px solid #1c2640; border-radius: 14px;
+      padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+    h2 {
+      font-size: 14px; color: var(--muted); margin: 0 0 10px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    label { display:block; font-size: 12px; color: var(--muted); margin: 6px 0 6px; }
+    input {
+      width: 100%; padding: 10px 12px; background: #0e1524;
+      border: 1px solid #1c2640; border-radius: 10px; color: var(--text);
+      outline:none;
+    }
+    input:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 2px rgba(106,169,255,.15);
+    }
+    .row { display:flex; gap:10px; }
+    button {
+      background: linear-gradient(180deg, #2a67ff, #1f52cc);
+      border: none; color: white; padding: 10px 14px;
+      border-radius: 10px; cursor: pointer; font-weight: 600;
+    }
+    button.secondary { background: #18223a; border: 1px solid #22305a; color: #d4e1ff; }
+    button.warn { background: linear-gradient(180deg, #ffb14d, #f39100); }
+    button.danger { background: linear-gradient(180deg, #ff6a6a, #d94a4a); }
+    pre {
+      margin: 10px 0 0; background: #0a1020;
+      border: 1px solid #1c2640; border-radius: 10px;
+      padding: 12px; max-height: 260px; overflow: auto;
+    }
+    small { color: var(--muted); }
+    .pill {
+      padding: 2px 8px; border:1px solid #2b3b66; border-radius: 999px;
+      background:#0e1730; color:#a6b6d6; font-size: 11px;
+    }
+    .list { display:flex; flex-direction:column; gap:8px; }
+    .pair { display:flex; gap:10px; }
+
+    @media (max-width: 980px) {
+      .span-4, .span-6, .span-8, .span-12 { grid-column: span 12; }
+    }
+
+    /* Popup overlay */
+    #popups {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display:flex; justify-content:center; align-items:center;
+      pointer-events:none; z-index:9999;
+    }
+    .popup-msg {
+      min-width: 280px; max-width: 420px;
+      background: #121a2a; padding: 16px 20px;
+      border-radius: 14px; text-align: center;
+      font-weight: 600; color: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4);
+      opacity: 0; transform: translateY(-20px);
+      transition: all 0.4s ease; pointer-events:auto;
+    }
+    .popup-show { opacity: 1 !important; transform: translateY(0) !important; }
+    .popup-success { background: linear-gradient(180deg, #4caf50, #3e8e41); }
+    .popup-danger { background: linear-gradient(180deg, #ff6a6a, #d94a4a); }
+    .popup-warn   { background: linear-gradient(180deg, #ffb14d, #f39100); }
+    .popup-info   { background: linear-gradient(180deg, #2a67ff, #1f52cc); }
+
+    /* Section titles */
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 30px 0 15px;
+      color: var(--accent);
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+    }
+
+    /* PQC Badge */
+    .pqc-badge {
+      display:inline-block;
+      margin-top:8px;
+      padding:4px 10px;
+      border-radius: 999px;
+      background: #18223a;
+      border: 1px solid #6aa9ff;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6aa9ff;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="dot"></div>
+  <h1>UPI + PQC Blockchain Prototype</h1>
+  <span class="pill">Dilithium2-signed tx</span>
+</header>
+
+<div class="wrap">
+  <!-- === Top Section: Transfers === -->
+  <h2 class="section-title">Transfers</h2>
+  <div class="grid">
+    <div class="card span-6">
+      <h2>Single Transfer</h2>
+      <label>Sender UPI</label><input id="s_sender" placeholder="user1@upi" />
+      <label>Receiver UPI</label><input id="s_receiver" placeholder="user2@upi" />
+      <label>Amount</label><input id="s_amount" type="number" />
+      <label>UPI PIN</label><input id="s_pin" type="password" />
+      <div class="row">
+        <label><input type="checkbox" id="s_fail" /> Simulate Failure</label>
+      </div>
+      <button onclick="sendSingle()">Send</button>
+      <pre id="singleOut"></pre>
+    </div>
+
+    <div class="card span-6">
+      <h2>Batch Transfer</h2>
+      <label>Sender UPI</label><input id="b_sender" placeholder="user1@upi" />
+      <label>UPI PIN</label><input id="b_pin" type="password" />
+      <div id="batchRows" class="list"></div>
+      <div class="row"><button onclick="addRow()">+ Add Row</button></div>
+      <label><input type="checkbox" id="b_fail" /> Simulate Failure</label>
+      <button onclick="sendBatch()">Send Batch</button>
+      <pre id="batchOut"></pre>
+    </div>
+  </div>
+
+  <!-- === Bottom Section: System Overview === -->
+  <h2 class="section-title">System Overview</h2>
+  <div class="grid">
+    <div class="card span-6">
+      <h2>Status</h2>
+      <pre id="statusBox"></pre>
+    </div>
+    <div class="card span-6">
+      <h2>Balances</h2>
+      <pre id="balancesBox"></pre>
+    </div>
+    <div class="card span-6">
+      <h2>History</h2>
+      <pre id="historyBox"></pre>
+    </div>
+    <div class="card span-6">
+      <h2>Chain</h2>
+      <pre id="chainBox"></pre>
+    </div>
+  </div>
+</div>
+
+<!-- Popup notifications -->
+<div id="popups"></div>
+
+<script>
+const API = "http://127.0.0.1:5000";
+
+function j(el, obj) { el.textContent = JSON.stringify(obj, null, 2); }
+function val(id) { return document.getElementById(id).value.trim(); }
+function bool(id) { return document.getElementById(id).checked; }
+function trunc(str, len=40) { if(!str) return str; return str.length > len ? str.slice(0,len) + "…" : str; }
+
+// Popup
+function showPopup(message, type="info", duration=3000, pqc=false) {
+  const container = document.getElementById("popups");
+  const div = document.createElement("div");
+  div.className = `popup-msg popup-${type}`;
+  div.innerHTML = message + (pqc ? '<div class="pqc-badge">🛡 PQC Verified</div>' : "");
+  container.appendChild(div);
+  setTimeout(() => div.classList.add("popup-show"), 50);
+  setTimeout(() => { div.classList.remove("popup-show"); setTimeout(()=>div.remove(), 400); }, duration);
+}
+
+// Loaders
+async function loadStatus() { j(document.getElementById("statusBox"), await (await fetch(`${API}/status`)).json()); }
+async function loadBalances() { j(document.getElementById("balancesBox"), await (await fetch(`${API}/balances`)).json()); }
+async function loadHistory() { j(document.getElementById("historyBox"), await (await fetch(`${API}/history`)).json()); }
+async function loadChain() { j(document.getElementById("chainBox"), await (await fetch(`${API}/chain`)).json()); }
+
+// Single Tx
+async function sendSingle() {
+  const payload = {
+    sender: val("s_sender"),
+    receiver: val("s_receiver"),
+    amount: Number(val("s_amount")),
+    upi_pin: val("s_pin"),
+    simulate_fail: bool("s_fail")
+  };
+  const r = await fetch(`${API}/send`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+  const resp = await r.json();
+  j(document.getElementById("singleOut"), resp);
+  loadBalances(); loadHistory(); loadChain();
+  if(resp.transaction){
+    const pqc = !!resp.transaction.pq_signature;
+    if(resp.status === "success") showPopup(`₹${resp.transaction.amount} debited`, "success", 3000, pqc);
+    if(resp.status === "failed_refund_scheduled") showPopup(`₹${resp.transaction.amount} failed. Refund scheduled`, "warn", 4000, pqc);
+  }
+}
+
+// Batch Tx
+function addRow() {
+  const wrap = document.getElementById("batchRows");
+  if (wrap.children.length >= 5) return;
+  const row = document.createElement("div");
+  row.className = "pair";
+  row.innerHTML = `<input class="b_rcv" placeholder="Receiver UPI (e.g., user2@upi)" /><input class="b_amt" type="number" placeholder="Amount" />`;
+  wrap.appendChild(row);
+}
+addRow();
+
+async function sendBatch() {
+  const sender = val("b_sender");
+  const upi_pin = val("b_pin");
+  const simulate_fail = bool("b_fail");
+  const rows = Array.from(document.querySelectorAll("#batchRows .pair"));
+  const transfers = rows.map(r => ({
+    receiver: r.querySelector(".b_rcv").value.trim(),
+    amount: Number(r.querySelector(".b_amt").value.trim())
+  })).filter(t => t.receiver && t.amount > 0);
+  const payload = { sender, upi_pin, transfers, simulate_fail };
+  const r = await fetch(`${API}/batch_send`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+  const resp = await r.json();
+  j(document.getElementById("batchOut"), resp);
+  loadBalances(); loadHistory(); loadChain();
+}
+
+// Init
+loadStatus(); loadBalances(); loadHistory(); loadChain();
+</script>
+</body>
+</html>
+

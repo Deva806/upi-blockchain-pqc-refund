@@ -1,0 +1,106 @@
+{
+  "balances": {
+    "user1@upi": 9000.0,
+    "user2@upi": 10500.0,
+    "user3@upi": 10500.0
+  },
+  "users": {
+    "user1@upi": {
+      "pin_hash": "scrypt:32768:8:1$lOWnKTGHxLnuBFt9$fc2af01822a877bbffac1fb26ebac00f9f2cc0ca2d44028b2fd17216df654c5f03db827da48f21d441d218d0d44f531b6490bd0b696079a524de1cc11f4a02d4"
+    },
+    "user2@upi": {
+      "pin_hash": "scrypt:32768:8:1$LOhmVEvobQUUOpRA$f2dccb136d7a1d86f42c579cf95cad512a530866314f184eacbb97c25c272b0aae49fa00c0cbd67646801b91a684b01ecacf88c906ce7e41af30c42ec32b14ca"
+    },
+    "user3@upi": {
+      "pin_hash": "scrypt:32768:8:1$MUJThErEMvxQL6xr$878d1c42ae91429ca498ec9ddb08e472964e6915aaa52204d53c2d5d76ce9a499731cec1b11967ec71bafacaf9908e073d51216ef9d1dbf988b650433cc65dd0"
+    }
+  },
+  "history": [
+    {
+      "tx_id": "a7f8adcfcbf78b8c4fde287e373bbdba870aa12fc76d17137ae1728ec4dc44b3",
+      "type": "send",
+      "sender": "user1@upi",
+      "receiver": "user2@upi",
+      "amount": 200.0,
+      "timestamp": "2025-09-02 00:14:32",
+      "status": "failed"
+    },
+    {
+      "tx_id": "d52b909f053fdebb7bf2fc7adbe01846f9336a6acdeb7d88ce62e37e9ba22886",
+      "type": "refund",
+      "timestamp": "2025-09-02 00:14:49",
+      "sender": "System",
+      "receiver": "user1@upi",
+      "amount": 200.0,
+      "status": "refunded",
+      "original_tx_id": "a7f8adcfcbf78b8c4fde287e373bbdba870aa12fc76d17137ae1728ec4dc44b3"
+    },
+    {
+      "tx_id": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "type": "send",
+      "sender": "user1@upi",
+      "receiver": "user2@upi",
+      "amount": 200.0,
+      "timestamp": "2025-09-02 00:23:26",
+      "status": "failed"
+    },
+    {
+      "tx_id": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "type": "refund",
+      "timestamp": "2025-09-02 00:23:44",
+      "sender": "System",
+      "receiver": "user1@upi",
+      "amount": 200.0,
+      "status": "refunded",
+      "original_tx_id": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6"
+    },
+    {
+      "tx_id": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "type": "batch_send",
+      "sender": "user1@upi",
+      "receiver": "user2@upi",
+      "amount": 100.0,
+      "timestamp": "2025-09-02 00:24:08",
+      "status": "completed"
+    },
+    {
+      "tx_id": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "type": "batch_send",
+      "sender": "user1@upi",
+      "receiver": "user3@upi",
+      "amount": 200.0,
+      "timestamp": "2025-09-02 00:24:08",
+      "status": "completed"
+    },
+    {
+      "tx_id": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "txid": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "type": "send",
+      "sender": "user1@upi",
+      "receiver": "user2@upi",
+      "amount": 200.0,
+      "timestamp": "2025-09-02 00:33:45",
+      "status": "completed"
+    },
+    {
+      "tx_id": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "txid": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "type": "batch_send",
+      "sender": "user1@upi",
+      "receiver": "user3@upi",
+      "amount": 300.0,
+      "timestamp": "2025-09-02 00:34:50",
+      "status": "completed"
+    },
+    {
+      "tx_id": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "txid": "0bcc82c388d48195d610aa6d72a7c2003f4186f66b46abec1cfeeeb2f3a1a3d6",
+      "type": "batch_send",
+      "sender": "user1@upi",
+      "receiver": "user2@upi",
+      "amount": 200.0,
+      "timestamp": "2025-09-02 00:34:50",
+      "status": "completed"
+    }
+  ]
+}

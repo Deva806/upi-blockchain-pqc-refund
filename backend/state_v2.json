@@ -1,0 +1,51 @@
+{
+  "balances": {
+    "user1@upi": 9300.0,
+    "user2@upi": 10400.0,
+    "user3@upi": 10300.0
+  },
+  "history": [
+    {
+      "type": "upi_transfer",
+      "sender": "user1@upi",
+      "receiver": "user2@upi",
+      "amount": 200.0,
+      "timestamp": "2025-08-31 23:16:49",
+      "txid": "3ef9968bbe004fc2b1d5267bc71054907ad3613286718dcbb7294aff45d8f1a6"
+    },
+    {
+      "type": "upi_transfer_failed",
+      "sender": "user1@upi",
+      "receiver": "user2@upi",
+      "amount": 250.0,
+      "timestamp": "2025-08-31 23:16:59",
+      "txid": "d5a49c89740c90e402d1018b569392d599a6f603a38a4ce9cd6a7647be3198bf"
+    },
+    {
+      "type": "refund",
+      "sender": "system_refund",
+      "receiver": "user1@upi",
+      "amount": 250.0,
+      "related_tx": "d5a49c89740c90e402d1018b569392d599a6f603a38a4ce9cd6a7647be3198bf",
+      "timestamp": "2025-08-31 23:16:59",
+      "txid": "57f0048c24e1768e8f2a056b1580f8f4f66a07c1b86cb65109818a6aa9658e5c"
+    },
+    {
+      "type": "batch_transfer",
+      "sender": "user1@upi",
+      "items": [
+        {
+          "receiver": "user2@upi",
+          "amount": 200.0
+        },
+        {
+          "receiver": "user3@upi",
+          "amount": 300.0
+        }
+      ],
+      "total_amount": 500.0,
+      "timestamp": "2025-08-31 23:17:26",
+      "txid": "b29f3666b66a79cea7bafe8fb6a061d616339fcb35b8cf945b79c23c583a4fc0"
+    }
+  ]
+}

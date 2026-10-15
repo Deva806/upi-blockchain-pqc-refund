@@ -1,0 +1,19 @@
+{
+  "balances": {
+    "user1@upi": 10000,
+    "user2@upi": 10000,
+    "user3@upi": 10000
+  },
+  "users": {
+    "user1@upi": {
+      "pin_hash": "scrypt:32768:8:1$Smg4uVtTHI09Tera$17c5ef4391d130eb980651a27e0d6c89c3d2b8ab77bb66333507c1b6f28f0f7dc57823397ac252f22ff88b44b4311720d7438c921a205cd815c6404da12c90f8"
+    },
+    "user2@upi": {
+      "pin_hash": "scrypt:32768:8:1$dXmIWFTNLhnlh7K5$66c83dea293546e8844cfda59cd9cf1d6972d8a1151768c22c318f1de7c50f91e057cf60635cc825d94b0325f2f2f31f24642ac0c33b73b774138ac60b00cd09"
+    },
+    "user3@upi": {
+      "pin_hash": "scrypt:32768:8:1$kYoTVqZxnKrnqUXE$d6d32de02dca86946d6db5c64553a1aba3fa16afc9111ce7daffc74fde0c54264986405a13fb64a8ab86b612517bccc66ad4170081b948f09f55c08629c3af2d"
+    }
+  },
+  "history": []
+}
